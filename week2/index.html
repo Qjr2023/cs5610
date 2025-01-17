@@ -13,8 +13,18 @@
                 </header>  
             <section>
                 <h2>
+                    <!-- 
+                    Security Concern:
+                    Using target="_blank" allows the new tab to access the original page via window.opener, 
+                    which could lead to phishing attacks or malicious redirects.
+
+                    Solution:
+                    1. rel="noopener" - Prevents the new tab from accessing window.opener.
+                    2. rel="noreferrer" - Prevents sending the Referer header to protect privacy.
+                    -->
                     <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" 
                     target="_blank"
+                    rel="noopener noreferrer"
                     title="Learn more about HTML elements">HTML Elements</a>
                 </h2>
 
