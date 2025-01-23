@@ -18,3 +18,7 @@ header {
   padding-bottom: 5px;
 }
 
+#job-title {
+  font-weight: bold;
+}
+
