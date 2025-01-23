@@ -46,3 +46,7 @@ a[href*="github"]::after {
 h2::first-letter {
   font-size: 3rem;
 }
+
+.skills li {
+  list-style-type:none;
+}
