@@ -30,3 +30,7 @@ header {
 a[href="https://github.com"]:hover {
   color: red;
 }
+
+h2::first-letter {
+  font-size: 3em;
+}
