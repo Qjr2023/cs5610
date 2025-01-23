@@ -27,10 +27,11 @@ header {
   margin: 10px 0;
 }
 
-a[href="https://github.com"]:hover {
-  color: red;
+a[href*="github"]:hover {
+  color: crimson;
 }
 
 h2::first-letter {
   font-size: 3em;
 }
+
