@@ -22,3 +22,8 @@ header {
   font-weight: bold;
 }
 
+.experience {
+  border: 2px dashed black;
+  margin: 10px 0;
+}
+
