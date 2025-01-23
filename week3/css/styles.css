@@ -27,3 +27,6 @@ header {
   margin: 10px 0;
 }
 
+a[href="https://github.com"]:hover {
+  color: red;
+}
