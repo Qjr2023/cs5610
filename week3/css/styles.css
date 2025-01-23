@@ -31,7 +31,10 @@ a[href*="github"]:hover {
   color: crimson;
 }
 
+a[href*="github"]::after {
+  content: url('../images/GitHub-Mark-32px.png');
+}
+
 h2::first-letter {
   font-size: 3rem;
 }
-
