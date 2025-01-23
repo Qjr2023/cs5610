@@ -13,6 +13,8 @@ h1 {
 }
 
 header {
+  text-align: center;
   border-bottom: 2px dotted darkslateblue;
-  margin-bottom: 5px;
+  padding-bottom: 5px;
 }
+
