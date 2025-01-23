@@ -32,6 +32,6 @@ a[href*="github"]:hover {
 }
 
 h2::first-letter {
-  font-size: 3em;
+  font-size: 3rem;
 }
 
