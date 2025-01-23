@@ -22,8 +22,8 @@ header {
   font-weight: bold;
 }
 
-.experience {
-  border: 2px dashed black;
+.experience, .education {
+  border: 2px dashed brown;
   margin: 10px 0;
 }
 
