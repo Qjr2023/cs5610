@@ -31,6 +31,10 @@ header a:last-child {
   margin: 10px 0;
 }
 
+.education .education-list > li:first-child {
+  font-style: italic;
+}
+
 a[href*="github"]:hover {
   color: crimson;
 }
