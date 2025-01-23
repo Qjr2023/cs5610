@@ -12,4 +12,7 @@ h1 {
   font-size: 2.2em;
 }
 
-
+header {
+  border-bottom: 2px dotted darkslateblue;
+  margin-bottom: 5px;
+}
