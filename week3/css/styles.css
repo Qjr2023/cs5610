@@ -48,3 +48,8 @@ h2::first-letter {
 .skills li {
   list-style-type: none;
 }
+
+.experience ul > li:not(:first-child),
+.experience ul > li:first-child ~ li {
+  color: darkgreen;
+}
