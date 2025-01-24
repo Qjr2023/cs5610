@@ -53,3 +53,7 @@ h2::first-letter {
 .experience ul > li:first-child ~ li {
   color: darkgreen;
 }
+
+a[href$=".edu"]::before{
+  content: url('../images/link.png');
+}
