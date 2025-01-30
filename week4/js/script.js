@@ -27,6 +27,8 @@ function findStudentsInVancouver () {
     let vancouverStudents = [];
     for (let i = 0; i < students.length; i++) {
         if (students[i].location === "Vancouver") {
+            // console.log students name who are in Vancouver
+            console.log(`${students[i].name} is in Vancouver`);
             vancouverStudents.push(students[i]);
         }
     }
