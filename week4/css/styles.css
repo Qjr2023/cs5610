@@ -4,6 +4,12 @@ body {
     margin: 0 auto;
   }
   
+  main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5em;
+  }
+
   .card {
     display: grid;
     grid-template-rows: 200px min-content;
@@ -19,6 +25,10 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
   
   .tags > * {
