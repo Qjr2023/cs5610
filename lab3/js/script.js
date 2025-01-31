@@ -15,6 +15,11 @@ const prices = {
     pudding: 1.0
 };
 
+function displayOrderSummary(order) {
+    console.log(`You have ordered a ${order.size} ${order.flavor} ${order.toppings[0]} with these toppings: ${order.toppings.join(', ') || 'None'}
+Total Price: $${order.finalPrice.toFixed(2)}`);
+}
+
 function placeOrder(flavor, size, toppings) {
     // Calculate toppings price
     const toppingsPrice = toppings.reduce((total, topping) => total + prices[topping], 0);
@@ -33,3 +38,7 @@ function placeOrder(flavor, size, toppings) {
     displayOrderSummary(order);
 }
 
+// Test the code with some example orders
+placeOrder('mango', 'medium', ['boba', 'jelly']);
+placeOrder('original', 'large', ['pudding']);
+placeOrder('strawberry', 'small', []);
