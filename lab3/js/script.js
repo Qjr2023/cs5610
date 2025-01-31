@@ -15,3 +15,21 @@ const prices = {
     pudding: 1.0
 };
 
+function placeOrder(flavor, size, toppings) {
+    // Calculate toppings price
+    const toppingsPrice = toppings.reduce((total, topping) => total + prices[topping], 0);
+    
+    // Calculate final price
+    const finalPrice = prices[size] * (prices[flavor] + toppingsPrice);
+    
+    // Create order object
+    const order = {
+        flavor,
+        size,
+        toppings,
+        finalPrice
+    };
+    
+    displayOrderSummary(order);
+}
+
