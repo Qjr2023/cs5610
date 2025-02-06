@@ -23,6 +23,7 @@
 
 
 
+
 // let shoppingItems = ["bread", "cheese", "green pepper"];
 // // ul class = "shopping-list"
 // const shoppingListElement = document.querySelector('.shopping');
@@ -47,7 +48,19 @@
 
 // changeListMarker();
 
+
+
+
+
 const button = document.querySelector('#updateImage');
+// cheech the storage
+const buttonText = localStorage.getItem('buttonText');
+// console.log(buttonText);
+// upadate the button text
+if (buttonText) {
+    button.innerText = buttonText;
+}
+
 function changeButtonText() {
     // will be called when the button is clicked
     // change the text to "Clicked!"
@@ -56,9 +69,26 @@ function changeButtonText() {
     } else if (button.innerText === "Click Me!") {
         button.innerText = "Clicked!"
     }
-
+    localStorage.setItem('buttonText', button.innerText);
     // if we want this to be called only once
     // button.removeEventListener('click', changeButtonText);
 }
 
 button.addEventListener('click', changeButtonText);
+
+
+
+
+
+const buttonContainer = document.querySelector('.buttonContainer');
+
+function changeButtonColor(event) {
+    if (event.target.nodeName === 'BUTTON') {
+        // return;
+    }
+    console.log(event.target.innerText);
+    // change the background color of the button
+    event.target.style.backgroundColor = event.target.innerText;
+}
+// setting the listener to the parent element
+buttonContainer.addEventListener('click', changeButtonColor);
