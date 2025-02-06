@@ -23,21 +23,42 @@
 
 
 
-let shoppingItems = ["bread", "cheese", "green pepper"];
-// ul class = "shopping-list"
-const shoppingListElement = document.querySelector('.shopping');
+// let shoppingItems = ["bread", "cheese", "green pepper"];
+// // ul class = "shopping-list"
+// const shoppingListElement = document.querySelector('.shopping');
 
-function populateSgoppingList(shoppingListItems) {
+// function populateSgoppingList(shoppingListItems) {
 
-    for (let i = 0; i < shoppingListItems.length; i++) {
-        // we need an element to each question
-        const li = document.createElement('li');
-        li.innerText = shoppingListItems[i];
-        shoppingListElement.appendChild(li);
+//     for (let i = 0; i < shoppingListItems.length; i++) {
+//         // we need an element to each question
+//         const li = document.createElement('li');
+//         li.innerText = shoppingListItems[i];
+//         shoppingListElement.appendChild(li);
+//     }
+//     // shoppingItems.forEach(item => {
+//     //     console.log(item);
+// }
+// populateSgoppingList(shoppingItems);
+
+// //Write a JS function to change the list marker type of all list items in the document to square by using a CSS rules with class selector.
+// function changeListMarker() {
+//     shoppingListElement.classList.add("squareList");
+// }
+
+// changeListMarker();
+
+const button = document.querySelector('#updateImage');
+function changeButtonText() {
+    // will be called when the button is clicked
+    // change the text to "Clicked!"
+    if(button.innerText === "Clicked!") {
+        button.innerText = "Click Me!";
+    } else if (button.innerText === "Click Me!") {
+        button.innerText = "Clicked!"
     }
-    // shoppingItems.forEach(item => {
-    //     console.log(item);
+
+    // if we want this to be called only once
+    // button.removeEventListener('click', changeButtonText);
 }
-populateSgoppingList(shoppingItems);
 
-
+button.addEventListener('click', changeButtonText);
