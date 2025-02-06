@@ -83,12 +83,13 @@ button.addEventListener('click', changeButtonText);
 const buttonContainer = document.querySelector('.buttonContainer');
 
 function changeButtonColor(event) {
+
     if (event.target.nodeName === 'BUTTON') {
         // return;
-    }
+    
     console.log(event.target.innerText);
     // change the background color of the button
-    event.target.style.backgroundColor = event.target.innerText;
+    event.target.style.backgroundColor = event.target.innerText;}
 }
 // setting the listener to the parent element
 buttonContainer.addEventListener('click', changeButtonColor);
