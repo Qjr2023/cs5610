@@ -15,30 +15,55 @@ const prices = {
     pudding: 1.0
 };
 
-function displayOrderSummary(order) {
-    console.log(`You have ordered a ${order.size} ${order.flavor} ${order.toppings[0]} with these toppings: ${order.toppings.join(', ') || 'None'}
-Total Price: $${order.finalPrice.toFixed(2)}`);
+function validateOrder() {
+    const flavor = document.getElementById('flavor').value;
+    const size = document.getElementById('size').value;
+    // Check if flavor and size are selected
+    if (flavor === '' || size === '') {
+        alert('Please select both a flavor and size for your order!');
+        return false;
+    }
+    return true;
 }
 
-function placeOrder(flavor, size, toppings) {
-    // Calculate toppings price
-    const toppingsPrice = toppings.reduce((total, topping) => total + prices[topping], 0);
+function displayOrderSummary(order) {
+    const summaryText =document.getElementById('orderDetails');
+    if (order.toppings.length === 0) {
+        summaryText.textContent = `You have ordered a ${order.size} ${order.flavor} boba with no toppings. Total Price: $${order.finalPrice.toFixed(2)}`;
+    } else {
+        summaryText.textContent = `You have ordered a ${order.size} ${order.flavor} boba with these toppings: ${order.toppings.join(', ')}. Total Price: $${order.finalPrice.toFixed(2)}`;
+    }
+}
+
+function placeOrder() {
+    if (!validateOrder()) { 
+        return;
+    }
+    const flavor = document.getElementById('flavor').value;
+    const size = document.getElementById('size').value;
+    const toppingsSelect = document.getElementById('toppings');
+    // Get all selected toppings
+    // Instructions: You need to hold down the Command key on Mac and the Ctrl key on Windows to select multiple items.
+    const toppings = Array.from(toppingsSelect.selectedOptions)
+        .map(option => option.value)
+        .filter(value => value !== '');
     
     // Calculate final price
+    const toppingsPrice = toppings.reduce((total, topping) => total + prices[topping], 0);
     const finalPrice = prices[size] * (prices[flavor] + toppingsPrice);
     
-    // Create order object
-    const order = {
-        flavor,
-        size,
-        toppings,
-        finalPrice
+    let order = {
+        flavor: flavor,
+        size: size,
+        toppings: toppings,
+        finalPrice: finalPrice
     };
     
     displayOrderSummary(order);
 }
 
-// Test the code with some example orders
-placeOrder('mango', 'medium', ['boba', 'jelly']);
-placeOrder('original', 'large', ['pudding']);
-placeOrder('strawberry', 'small', []);
+// Add event listener to place order button
+document.getElementById('placeOrderButton').addEventListener('click', function(e) {
+    e.preventDefault();
+    placeOrder();
+});
