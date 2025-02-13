@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>Bubble Tea Order</title>
-    <link rel="stylesheet" href="css/styles.css"/>
-    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="js/main.js"></script>
   </head>
 
   <body>
     <main>
       <h1>Boba Tea Order Form</h1>
       <form id="orderForm">
+        <div>
           <label for="flavor">Choose a flavor:</label>
           <select id="flavor" name="flavor">
             <option value="">--Please choose a flavor--</option>
@@ -18,7 +19,8 @@
             <option value="mango">Mango</option>
             <option value="strawberry">Strawberry</option>
           </select>
-
+        </div>
+        <div>
           <label for="size">Choose a size:</label>
           <select id="size" name="size">
             <option value="">--Please choose a size--</option>
@@ -26,17 +28,24 @@
             <option value="medium">Medium</option>
             <option value="large">Large</option>
           </select>
-
+        </div>
+        <div>
           <label for="toppings">Choose toppings:</label>
-          <select id="toppings" name="toppings" multiple>
+          <select multiple id="toppings" name="toppings">
             <option value="">--Please choose toppings--</option>
             <option value="boba">Boba</option>
             <option value="jelly">Jelly</option>
             <option value="pudding">Pudding</option>
           </select>
+        </div>
+        <button type="button" id="placeOrderButton">Place Order</button>
+      </form>
 
-          <button type="submit">Place Order</button>
-        </form>
+      <div id="orderSummary" class="card">
+        <h2>Order Summary</h2>
+        <p id="orderDetails">Your order details will appear here.</p>
+      </div>
+
     </main>
   </body>
 </html>
