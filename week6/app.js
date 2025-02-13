@@ -32,6 +32,11 @@ app.get('/tasks', (req, res) => {
     res.send('<h1>List of all the tasks</h1>');
 });
 
+app.get('/tasks/:taskId', (req, res) => {
+    console.log(req.params.taskId);
+    res.send(`<p>You are reviewing task ${req.params.taskId}</p>`)
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
