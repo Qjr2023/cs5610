@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
 });
 const port = 3000;
 
+app.get('/tasks', (req, res) => {
+    res.send('<h1>List of all the tasks</h1>');
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
