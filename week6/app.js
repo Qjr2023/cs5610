@@ -23,6 +23,8 @@
 const express = require('express');
 const app = express();
 app.use(express.static("public"));
+app.set("view engine", "pug");
+app.set("views", "./views");
 
 const taskRouter = require("./routes/tasks");
 app.use("/tasks", taskRouter)
