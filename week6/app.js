@@ -24,6 +24,8 @@ const express = require('express');
 const app = express();
 app.use(express.static("public"));
 
+const taskRouter = require("./routes/tasks");
+app.use("/tasks", taskRouter)
 app.get('/', (req, res) => {
     res.send("Hello World");
 });
