@@ -1,8 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
 router.get('/', (req, res) => {
-    res.send('<h1>List of all the tasks</h1>');
+    const promise = axios.get('https://jsonplaceholder.typicode.com/todos/')
+    // res.send('<h1>List of all the tasks</h1>');
+    // console.log(promise);
+    promise.then((response) => {
+        // console.log(response.data);
+        // res.render('tasks', {tasks: response.data});
+        res.json(response.data);
+    });
+
 });
 
 router.get('/:taskId', (req, res) => {
