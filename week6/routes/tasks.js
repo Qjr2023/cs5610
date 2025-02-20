@@ -6,11 +6,12 @@ router.get('/', (req, res) => {
     const promise = axios.get('https://jsonplaceholder.typicode.com/todos/')
     // res.send('<h1>List of all the tasks</h1>');
     // console.log(promise);
-    promise.then((response) => {
+    promise
+    .then((response) => {
         // console.log(response.data);
         // res.render('tasks', {tasks: response.data});
         res.json(response.data);
-    });
+    }).catch((err) => console.log(err.status));
 
 });
 
