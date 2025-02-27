@@ -19,7 +19,8 @@
 
 // const logger = require('./logger.js');
 // logger.log();
-
+const db = require('./db.js');
+console.log(db);
 const express = require('express');
 const app = express();
 app.use(express.static("public"));
@@ -33,6 +34,15 @@ app.get('/', (req, res) => {
 });
 const port = 3000;
 
+// app.listen(port, async function() => {
+    
+// }
+app.listen(port, async function() {
+    await db.connect();
+    console.log(`Server is running on port ${port}`);
+    db.addToDB({name: "Task 1", description: "This is the first task"});
+});
+
 app.get('/tasks', (req, res) => {
     res.send('<h1>List of all the tasks</h1>');
 });
@@ -42,6 +52,3 @@ app.get('/tasks/:taskId', (req, res) => {
     res.send(`<p>You are reviewing task ${req.params.taskId}</p>`)
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
