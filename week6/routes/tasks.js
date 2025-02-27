@@ -8,10 +8,16 @@ router.post('/', async(req, res) => {
         console.log("req.body", req.body);
     // db.addToDB(req.body);
         await db.addToDB(req.body);
-        res.send("Task added");
+        res.redirect('/tasks');
+        // res.send("Task added");
     } catch (err) {
         console.log(err.status);
     }
+}
+)
+
+router.get('/newtask', (req, res) => {
+    res.render('taskForm');
 }
 )
 
