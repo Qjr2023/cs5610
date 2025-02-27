@@ -1,5 +1,7 @@
 const {MongoClient} = require('mongodb'); 
-const uri = "mongodb+srv://fang:GTAWCZfn9tPQnodj@testcs5610.r2e7l.mongodb.net/?retryWrites=true&w=majority&appName=testCS5610"
+require('dotenv').config();
+const uri = process.env.MongoDB_URL;
+// const uri = "mongodb+srv://fang:GTAWCZfn9tPQnodj@testcs5610.r2e7l.mongodb.net/?retryWrites=true&w=majority&appName=testCS5610"
 const client = new MongoClient(uri);
 
 module.exports={
