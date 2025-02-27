@@ -24,6 +24,9 @@ console.log(db);
 const express = require('express');
 const app = express();
 app.use(express.static("public"));
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.set("view engine", "pug");
 app.set("views", "./views");
 
@@ -34,13 +37,11 @@ app.get('/', (req, res) => {
 });
 const port = 3000;
 
-// app.listen(port, async function() => {
-    
-// }
 app.listen(port, async function() {
     await db.connect();
     console.log(`Server is running on port ${port}`);
-    db.addToDB({name: "Task 1", description: "This is the first task"});
+    // db.addToDB({name: "Task 1", description: "This is the first task"});
+    
 });
 
 app.get('/tasks', (req, res) => {

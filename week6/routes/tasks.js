@@ -1,6 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const db = require('../db.js');
+
+router.post('/', async(req, res) => {
+    try {
+        console.log("req.body", req.body);
+    // db.addToDB(req.body);
+        await db.addToDB(req.body);
+        res.send("Task added");
+    } catch (err) {
+        console.log(err.status);
+    }
+}
+)
 
 router.get('/', async(req, res) => {
     try {
