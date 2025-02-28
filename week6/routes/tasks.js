@@ -6,7 +6,6 @@ const db = require('../db.js');
 router.post('/', async(req, res) => {
     try {
         console.log("req.body", req.body);
-    // db.addToDB(req.body);
         await db.addToDB(req.body);
         res.redirect('/tasks');
         // res.send("Task added");
@@ -23,23 +22,14 @@ router.get('/newtask', (req, res) => {
 
 router.get('/', async(req, res) => {
     try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos/');
-        res.json(response.data);
+        // Use our new getAllTasks function instead of the fake API
+        const tasks = await db.getAllTasks();
+        // Render tasks view with our database tasks
+        res.render('task', { tasks });
     } catch (err) {
-        console.log(err.status);
+        console.error(err);
+        res.status(500).send("Error retrieving tasks");
     }
-    
-
-    // const promise = axios.get('https://jsonplaceholder.typicode.com/todos/')
-    // // res.send('<h1>List of all the tasks</h1>');
-    // // console.log(promise);
-    // promise
-    // .then((response) => {
-    //     // console.log(response.data);
-    //     // res.render('tasks', {tasks: response.data});
-    //     res.json(response.data);
-    // }).catch((err) => console.log(err.status));
-
 });
 
 router.get('/:taskId', async(req, res) => {
