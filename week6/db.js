@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongodb');  
+const {MongoClient, ObjectId} = require('mongodb');  
 require('dotenv').config();
 const uri = process.env.MongoDB_URL;
 // const uri = "mongodb+srv://fang:GTAWCZfn9tPQnodj@testcs5610.r2e7l.mongodb.net/?retryWrites=true&w=majority&appName=testCS5610"
@@ -16,7 +16,7 @@ module.exports={
             console.log(e);
         }
     },
-    // add a function that read and returns all the data in our collection
+    // read and returns all the data in our collection
     getAllTasks: async function(){
         try{
             const cursor = client.db("cs5610").collection("tasks").find();
@@ -25,6 +25,20 @@ module.exports={
         } catch (e){
             console.log(e);
             return [];
+        }
+    },
+    // receives a query as a parameter and find the first document that matches the given query
+    findOneTask: async function(query){
+        try {
+            // If the query contains an _id string, convert it to ObjectId
+            if (query._id && typeof query._id === 'string') {
+                query._id = new ObjectId(query._id);
+            }
+            const task = await client.db("cs5610").collection("tasks").findOne(query);
+            return task;
+        } catch (e) {
+            console.log(e);
+            return null;
         }
     }
 }
