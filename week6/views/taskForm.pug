@@ -4,10 +4,11 @@ html(lang="en")
     title="Task Details"
     link(rel="stylesheet", href="/styles.css")
   body
-    <form action="/tasks" method="post">
-    <label for="title">Enter Task's Title: </label>
-    <input id="title" type="text" name="title" >
-    <label for="date">Enter Task's Date: </label>
-    <input id="date" type="date" name="date" >
-    <input type="submit" value="Submit">
-    </form>
+    form(action="/tasks" method="POST")
+    label(for="title") Enter task's title:
+    input(type="text" name="title")
+    label(for="date") Date:
+    input( name="date" type="date")
+    label(for="completed") Completed:
+    input(type="checkbox" name="completed")
+    button(type="submit") Add Task

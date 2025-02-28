@@ -20,4 +20,6 @@ html(lang="en")
     ul
       each task in tasks
         li
-          a(href=`/tasks/${task._id}`) #{task.title} (#{task.date || 'No date'}) 
+          a(href=`/tasks/${task._id}`) #{task.title}
+          |  (#{task.completed ? "completed" : "not completed"})
+
