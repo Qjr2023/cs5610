@@ -2,63 +2,59 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const db = require('../db.js');
+const { ObjectId } = require('mongodb');
 
 router.post('/', async(req, res) => {
     try {
-        console.log("req.body", req.body);
-    // db.addToDB(req.body);
         await db.addToDB(req.body);
         res.redirect('/tasks');
-        // res.send("Task added");
     } catch (err) {
         console.log(err.status);
     }
 }
 )
 
-router.get('/newtask', (req, res) => {
-    res.render('taskForm');
+router.get('/newtask', async(req, res) => {
+    try {
+        res.render('taskForm');
+    } catch (err) {
+        console.log(err.status);
+        res.status(500).send("Error adding task");
+    }
 }
 )
 
 router.get('/', async(req, res) => {
     try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos/');
-        res.json(response.data);
+        // Use our new getAllTasks function instead of the fake API
+        const tasks = await db.getAllTasks();
+        // Render tasks view with our database tasks
+        res.render('task', { tasks });
     } catch (err) {
-        console.log(err.status);
+        console.error(err);
+        res.status(500).send("Error retrieving tasks");
     }
-    
-
-    // const promise = axios.get('https://jsonplaceholder.typicode.com/todos/')
-    // // res.send('<h1>List of all the tasks</h1>');
-    // // console.log(promise);
-    // promise
-    // .then((response) => {
-    //     // console.log(response.data);
-    //     // res.render('tasks', {tasks: response.data});
-    //     res.json(response.data);
-    // }).catch((err) => console.log(err.status));
-
 });
 
-router.get('/:taskId', async(req, res) => {
+router.get('/:taskId', async (req, res) => {
     try {
-        const taskResponse = await axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.taskId}`);
-        const userResponse = await axios.get(`https://jsonplaceholder.typicode.com/users/${taskResponse.data.userId}`);
-        // res.json(taskResponse.data);
-        res.render('task', {
-            id: req.params.taskId, 
-            title:taskResponse.data.title, 
-            completed: taskResponse.data.completed,
-            name: userResponse.data.name
+        const taskId = req.params.taskId;
+        if (!ObjectId.isValid(taskId)) {
+            return res.status(400).send("Invalid Task ID");
+        }
+        const task = await db.findOneTask({ _id: new ObjectId(taskId) });
+        if (!task) {
+            return res.status(404).send("Task not found");
+        }
+        res.render("taskId", {
+            id: taskId, 
+            title: task.title,
+            completed: task.completed || false, 
+            date: task.date || "No date provided" 
         });
     } catch (err) {
-        console.log(err.status);
+        console.log(err);
+        res.status(500).send("Error retrieving task");
     }
-
-    // console.log(req.params.taskId);
-    // res.send(`<p>You are reviewing task ${req.params.taskId}</p>`)
 });
-
 module.exports = router;
