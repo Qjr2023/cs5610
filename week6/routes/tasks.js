@@ -6,7 +6,7 @@ const { ObjectId } = require('mongodb');
 
 router.post('/', async(req, res) => {
     try {
-        console.log("req.body", req.body);
+        // console.log("req.body", req.body);
         await db.addToDB(req.body);
         res.redirect('/tasks');
         // res.send("Task added");
@@ -16,8 +16,14 @@ router.post('/', async(req, res) => {
 }
 )
 
-router.get('/newtask', (req, res) => {
-    res.render('taskForm');
+router.get('/newtask', async(req, res) => {
+    try {
+        const result = await db.addToDB(req.body);
+        res.render('taskForm', { result });
+    } catch (err) {
+        console.log(err.status);
+        res.status(500).send("Error adding task");
+    }
 }
 )
 

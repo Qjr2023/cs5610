@@ -12,8 +12,10 @@ module.exports={
     addToDB: async function(doc){
         try{
             const result = await client.db("cs5610").collection("tasks").insertOne(doc);
+            return result;
         } catch (e){
             console.log(e);
+            return {error: e};
         }
     },
     // read and returns all the data in our collection
