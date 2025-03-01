@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const db = require('../db.js');
+const { ObjectId } = require('mongodb');
 
 router.post('/', async(req, res) => {
     try {
@@ -32,23 +33,25 @@ router.get('/', async(req, res) => {
     }
 });
 
-router.get('/:taskId', async(req, res) => {
+router.get('/:taskId', async (req, res) => {
     try {
-        const taskResponse = await axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.taskId}`);
-        const userResponse = await axios.get(`https://jsonplaceholder.typicode.com/users/${taskResponse.data.userId}`);
-        // res.json(taskResponse.data);
-        res.render('task', {
-            id: req.params.taskId, 
-            title:taskResponse.data.title, 
-            completed: taskResponse.data.completed,
-            name: userResponse.data.name
+        const taskId = req.params.taskId;
+        if (!ObjectId.isValid(taskId)) {
+            return res.status(400).send("Invalid Task ID");
+        }
+        const task = await db.findOneTask({ _id: new ObjectId(taskId) });
+        if (!task) {
+            return res.status(404).send("Task not found");
+        }
+        res.render("taskId", {
+            id: taskId, 
+            title: task.title,
+            completed: task.completed || false, 
+            date: task.date || "No date provided" 
         });
     } catch (err) {
-        console.log(err.status);
+        console.log(err);
+        res.status(500).send("Error retrieving task");
     }
-
-    // console.log(req.params.taskId);
-    // res.send(`<p>You are reviewing task ${req.params.taskId}</p>`)
 });
-
 module.exports = router;

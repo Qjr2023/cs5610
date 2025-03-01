@@ -30,10 +30,6 @@ module.exports={
     // receives a query as a parameter and find the first document that matches the given query
     findOneTask: async function(query){
         try {
-            // If the query contains an _id string, convert it to ObjectId
-            if (query._id && typeof query._id === 'string') {
-                query._id = new ObjectId(query._id);
-            }
             const task = await client.db("cs5610").collection("tasks").findOne(query);
             return task;
         } catch (e) {
