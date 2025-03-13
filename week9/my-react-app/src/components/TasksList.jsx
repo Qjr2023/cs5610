@@ -21,7 +21,8 @@ export default function TasksList() {
             },
         ]);
     
-
+    // setTasks([]);
+    // console.log(tasks);
     return (
         <ul>
             {tasks.map((task) => {
