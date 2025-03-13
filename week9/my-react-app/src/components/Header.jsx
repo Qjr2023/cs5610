@@ -1,6 +1,12 @@
-constructor(props) {
-  super(props)
+import React, { PureComponent } from 'react'
 
-  this.state = {
+export default function Header({ myAppName }) {
+  console.log(myAppName);
+    return (
+      <div>
+        <header>
+          <h1>Welcome to {myAppName}</h1>
+        </header>
+      </div>
+    )
   }
-}
