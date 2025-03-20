@@ -3,7 +3,7 @@ import React, {  useState } from 'react'
 export default function AddTask() {
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
-    function submitHandler(e){
+    async function submitHandler(e){
         e.preventDefault();
         const newTask = {
             title: title,
@@ -11,7 +11,17 @@ export default function AddTask() {
         }
         setTitle("");
         setDate("");
-        console.log(newTask);
+        try {
+            await fetch("http://localhost:5001/tasks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newTask)
+            });
+        } catch (error) {
+            console.log("submitHandler", error);
+        }
     }
     return (
         <form onSubmit={submitHandler}>
