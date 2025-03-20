@@ -23,11 +23,22 @@ export default function TasksList() {
     
     // setTasks([]);
     // console.log(tasks);
+
+    function deleteTask(deletedId) {
+      console.log("Delete pressed", deletedId);
+      const newArray = tasks.filter((task) => task.id !== deletedId);
+      setTasks(newArray);
+    }
+  
     return (
-        <ul>
-            {tasks.map((task) => {
-            return <Task key={task.id} taskObj={task}/>
-            })}
-        </ul>
-    )
+      <ul>
+        {tasks.length === 0 ? (
+          <p>No tasks</p>
+        ) : (
+          tasks.map((task) => (
+            <Task key={task.id} taskObj={task} onDelete={deleteTask} />
+          ))
+        )}
+      </ul>
+    );
 }
