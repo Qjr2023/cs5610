@@ -6,6 +6,8 @@ import TasksList from "./components/TasksList";
 export default function App() {
   const appName = "My React App";
   const [tasksFromServer, setTasksFromServer] = useState([]);
+  const [showAddTask, setShowAddTask] = useState(false);
+
   async function fetchDate() {
     try{
       const response = await fetch("http://localhost:5001/tasks");
@@ -15,7 +17,6 @@ export default function App() {
       } else {
         throw new Error("fetch failed");
       }
-      
     } catch (error) {
       console.log("fetchData", error);
     }
@@ -25,10 +26,19 @@ export default function App() {
     fetchDate();
   }, []);
 
+  function toggleShowAddTask() {
+    setShowAddTask((prev) => !prev);
+  }
+
   return (
     <div className="appContainer">
-      <Header myAppName={appName} version={2} />
-      <AddTask />
+      <Header 
+      myAppName={appName} 
+      version={2}
+      onToggleAddTask={toggleShowAddTask}
+      showAddTask={showAddTask}
+       />
+      {showAddTask && <AddTask />}
       <TasksList tasks={tasksFromServer}/>
     </div>
   );
