@@ -57,6 +57,7 @@ export default function App() {
           }
         />
         <Route path="/tasks" element={<TasksList tasks={tasksFromServer} />} />
+        <Route path="*" element={<h1>This page doesn't exist.</h1>} />
       </Routes>
 
     </div>
