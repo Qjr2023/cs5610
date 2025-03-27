@@ -19,6 +19,12 @@ export default function AddTask() {
                 },
                 body: JSON.stringify(newTask)
             });
+            // if (response.ok) {
+            //     const data = await response.json();
+            //     console.log(data);
+            // }
+            // const data = await response.json();
+            // console.log(data);
         } catch (error) {
             console.log("submitHandler", error);
         }
