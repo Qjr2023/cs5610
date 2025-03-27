@@ -92,6 +92,10 @@ a.active {
   color: rgb(242, 83, 141);
 }
 
+nav a {
+  margin-right: 20px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
