@@ -88,6 +88,10 @@ button:focus-visible {
   margin-right: 10px;
 }
 
+a.active {
+  color: rgb(242, 83, 141);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -2,8 +2,9 @@ import React, { use, useEffect, useState } from "react";
 import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import TasksList from "./components/TasksList";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function App() {
   const appName = "My React App";
@@ -37,8 +38,8 @@ export default function App() {
   return (
     <div className="appContainer">
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/tasks">Tasks</Link>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/tasks">Tasks</NavLink>
       </nav>
       <Routes>
         <Route
