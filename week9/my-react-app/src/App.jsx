@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import TasksList from "./components/TasksList";
+import TaskDetail from "./components/TaskDetail";
 import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -56,7 +57,9 @@ export default function App() {
             </>
           }
         />
-        <Route path="/tasks" element={<TasksList tasks={tasksFromServer} />} />
+        <Route path="/tasks" element={<TasksList tasks={tasksFromServer} />}>
+          <Route path=":taskId" element={<TaskDetail />} />
+        </Route>
         <Route path="*" element={<h1>This page doesn't exist.</h1>} />
       </Routes>
 

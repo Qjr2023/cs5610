@@ -89,7 +89,8 @@ button:focus-visible {
 }
 
 a.active {
-  color: rgb(242, 83, 141);
+  /* color: rgb(242, 83, 141); */
+  font-weight: bold
 }
 
 nav a {

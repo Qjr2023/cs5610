@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Task from './Task';
+import { Outlet } from 'react-router-dom';
 
 export default function TasksList( {tasks} ) {
 
@@ -18,14 +19,17 @@ export default function TasksList( {tasks} ) {
     }
   
     return (
-      <ul>
-        {tasks.length === 0 ? (
-          <li>No tasks left</li>
-        ) : (
-          tasks.map((task) => (
-            <Task key={task.id} taskObj={task} onDelete={deleteTask} />
-          ))
-        )}
-      </ul>
+      <>
+        <ul>
+          {tasks.length === 0 ? (
+            <li>No tasks left</li>
+          ) : (
+            tasks.map((task) => (
+              <Task key={task.id} taskObj={task} onDelete={deleteTask} />
+            ))
+          )}
+        </ul>
+        <Outlet/>
+      </>
     );
 }
