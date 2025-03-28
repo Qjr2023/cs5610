@@ -6,8 +6,7 @@ const TaskDetail = () => {
   
   return (
     <div>
-      <h1>Task Detail for Task ID: {taskId}</h1>
-      {/* You can now fetch or display the task details using taskId */}
+      Task Detail for Task ID: {taskId}
     </div>
   );
 };

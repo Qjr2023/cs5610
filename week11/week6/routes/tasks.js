@@ -57,4 +57,18 @@ router.get('/:taskId', async (req, res) => {
         res.status(500).send("Error retrieving task");
     }
 });
+
+router.delete("/:taskId", async (req, res) => {
+    console.log("in router delete ", req.params.taskId);
+    try {
+      const result = await db.deleteOne({ _id: new ObjectId(req.params.taskId) });
+      console.log(result);
+      return res.status(200).json({ message: "Task deleted" }); // ✅ Success response
+  
+      // res.redirect("/api/tasks");
+    } catch (err) {
+      console.log("delete router ", err);
+    }
+  });
+  
 module.exports = router;
