@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 
 export default function App() {
   const appName = "My React App";
@@ -22,6 +23,7 @@ export default function App() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/tasks">Tasks</NavLink>
         <LoginButton />
+        <LogoutButton />
       </nav>
       <Routes>
         <Route
