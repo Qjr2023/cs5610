@@ -6,6 +6,7 @@ import TaskDetail from "./components/TaskDetail";
 import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import LoginButton from "./components/LoginButton";
 
 export default function App() {
   const appName = "My React App";
@@ -20,6 +21,7 @@ export default function App() {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/tasks">Tasks</NavLink>
+        <LoginButton />
       </nav>
       <Routes>
         <Route

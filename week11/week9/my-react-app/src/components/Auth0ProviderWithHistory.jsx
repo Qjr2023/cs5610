@@ -1,10 +1,9 @@
 import React from 'react'
 import { Auth0Provider } from "@auth0/auth0-react";
 import.meta.env
+import { useNavigate } from 'react-router-dom';
 
-
-
-export default function Auth0ProviderWithHistory({childern}) {
+export default function Auth0ProviderWithHistory({children}) {
     const navigate = useNavigate();
     console.log(import.meta.env)
   return (
@@ -17,7 +16,7 @@ export default function Auth0ProviderWithHistory({childern}) {
       }
     }
     >
-        {childern}
+        {children}
     </ Auth0Provider>
   )
 }
