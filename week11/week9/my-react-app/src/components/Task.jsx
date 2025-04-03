@@ -1,5 +1,7 @@
 import React from 'react'
 import { IoTrashOutline } from "react-icons/io5";
+import { NavLink } from 'react-router-dom';
+
 export default function Task({ taskObj, onDelete }) {
   function deletePressed() {
     // console.log("Delete pressed");
@@ -10,7 +12,7 @@ export default function Task({ taskObj, onDelete }) {
     <li >
         <div className="classContainer">
           <div className="taskIconContainer">
-            <p>{taskObj.title}</p>
+            <NavLink to={`/tasks/${taskObj.id}`}>{taskObj.title}</NavLink>
             <IoTrashOutline onClick={deletePressed}/>
           </div>
           <p>{taskObj.date}</p>
