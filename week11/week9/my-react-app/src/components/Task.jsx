@@ -6,13 +6,16 @@ export default function Task({ taskObj, onDelete }) {
   function deletePressed() {
     // console.log("Delete pressed");
     // Add code to delete task
-    onDelete(taskObj.id);
+    const idToDelete = taskObj._id;
+    onDelete(idToDelete);
   }
   return (
-    <li >
+    <li>
         <div className="classContainer">
           <div className="taskIconContainer">
-            <NavLink to={`/tasks/${taskObj.id}`}>{taskObj.title}</NavLink>
+            <NavLink to={`/tasks/${taskObj._id}`}>
+              {taskObj.title}
+            </NavLink>
             <IoTrashOutline onClick={deletePressed}/>
           </div>
           <p>{taskObj.date}</p>
