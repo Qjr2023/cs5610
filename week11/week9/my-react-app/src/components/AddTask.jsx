@@ -23,6 +23,10 @@ export default function AddTask() {
                 body: JSON.stringify(newTask)
             });
             if (!response.ok) {
+                if(response.status === 401) {
+                    // <Alert>Your post need authentication</Alert>
+                    console.log("Your post need authentication");
+                }
                 return;
             }
             const data = await response.json();
