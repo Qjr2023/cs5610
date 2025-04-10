@@ -1,7 +1,10 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, {  useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
+
 export default function AddTask() {
+    const { getAccessTokenSilently } = useAuth0();
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const navigate = useNavigate();
@@ -15,14 +18,21 @@ export default function AddTask() {
         setTitle("");
         setDate("");
         try {
+            const token = await getAccessTokenSilently();
+            console.log("Access Token:", token);
             const response = await fetch("http://localhost:3000/api/tasks", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(newTask)
             });
             if (!response.ok) {
+                if(response.status === 401) {
+                    // <Alert>Your post need authentication</Alert>
+                    console.log("Your post need authentication");
+                }
                 return;
             }
             const data = await response.json();
