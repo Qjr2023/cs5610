@@ -27,9 +27,9 @@ router.get('/newtask', async(req, res) => {
 router.get('/', async(req, res) => {
     try {
         // Use our new getAllTasks function instead of the fake API
-        const tasks = await db.getAllTasks();
+        const tasks = await db.readAll();
         // Render tasks view with our database tasks
-        res.json(data);
+        res.json(tasks);
     } catch (err) {
         console.error(err);
         // res.status(500).send("Error retrieving tasks");

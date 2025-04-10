@@ -28,7 +28,7 @@ module.exports={
     //         return [];
     //     }
     // },
-    // // receives a query as a parameter and find the first document that matches the given query
+    // receives a query as a parameter and find the first document that matches the given query
     // findOneTask: async function(query){
     //     try {
     //         const task = await client.db("cs5610").collection("tasks").findOne(query);
@@ -37,7 +37,7 @@ module.exports={
     //         console.log(e);
     //         return null;
     //     }
-    // }
+    // },
     addToDB: async function (doc) {
         try {
           const result = await client

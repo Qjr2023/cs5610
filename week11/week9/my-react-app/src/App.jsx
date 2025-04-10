@@ -6,6 +6,11 @@ import TaskDetail from "./components/TaskDetail";
 import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
+import AuthenticationButton from "./components/AuthenticationButton";
+import Profile from "./components/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   const appName = "My React App";
@@ -20,6 +25,10 @@ export default function App() {
       <nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/tasks">Tasks</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
+        <AuthenticationButton /> 
+        {/* <LoginButton />
+        <LogoutButton /> */}
       </nav>
       <Routes>
         <Route
@@ -39,6 +48,10 @@ export default function App() {
         <Route path="tasks" element={<TasksList/>}>
           <Route path=":taskId" element={<TaskDetail />} />
         </Route>
+        <Route
+          path="/profile"
+          element={<ProtectedRoute component={Profile} />}
+        />
         <Route path="*" element={<h1>This page doesn't exist.</h1>} />
       </Routes>
 

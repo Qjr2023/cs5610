@@ -1,76 +1,100 @@
-import React, { useState } from 'react'
-import Task from './Task';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useState } from "react";
+import Task from "./Task";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 export default function TasksList() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);  
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const location = useLocation();
 
-  useEffect(() => { 
-    let controller = new AbortController();
+  useEffect(() => {
+    // create an AbortController instance
+    const controller = new AbortController();
     const signal = controller.signal;
-
-    async function fetchDate() {
-      try{
-        // const response = await fetch("http://localhost:5001/tasks", { signle });
+    
+    async function fetchData() {
+      setIsLoading(true);
+      setError(null);
+      
+      try {
         const response = await fetch("http://localhost:3000/api/tasks", {
-          signal});
+          signal,
+        });
+        
         if (response.ok) {
           const data = await response.json();
-          setTasksFromServer(data); 
-          setIsLoading(false);
-          console.log("fetchData ", data);
+          setTasksFromServer(data);
+          console.log("fetchData success:", data);
         } else {
-          throw new Error("fetch failed");
+          throw new Error("Fetch failed with status: " + response.status);
         }
-      } catch (error) {
-        console.log("fetchData", error);
+      } catch (err) {
+        // only log the error if it's not an AbortError
+        if (err.name !== 'AbortError') {
+          console.error("fetchData error:", err);
+          setError(err.message);
+        } else {
+          console.log("Fetch aborted");
+        }
+      } finally {
+        // whatever happens, we want to set loading to false
+        if (!signal.aborted) {
+          setIsLoading(false);
+        }
       }
     }
-    fetchDate();
+
+    fetchData();
+
+    // cleanup function to abort the fetch request
     return () => {
-      console.log("cleanup");
+      console.log("Cleaning up and aborting fetch");
       controller.abort();
     };
-  }, []);
+  }, [location.pathname]); // added location.pathname to the dependency array
 
   const navigate = useNavigate();
+
   async function deleteTask(deletedId) {
-    console.log("Delete pressed", deletedId);
-    try{
-      const response = await fetch("http://localhost:3000/api/tasks/" + deletedId, {
-        method: "DELETE",
-      });
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/tasks/${deletedId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      
       if (response.ok) {
         const newArray = tasksFromServer.filter((task) => {
           return task._id !== deletedId;
         });
         setTasksFromServer(newArray);
         navigate("/tasks");
+      } else {
+        throw new Error(`Delete failed with status: ${response.status}`);
       }
     } catch (err) {
-      console.log("deleteTask ", err);
+      console.error("deleteTask error:", err);
     }
   }
-  
-  
-    return (
-      <>
-        {isLoading ? (
-          <p> Loading</p>
-        ) : tasksFromServer.length === 0 ? (
-          <p>No tasks left</p>
-          ) : (
-            <ul>
-            {tasksFromServer.map((task) => {
+
+  return (
+    <>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : tasksFromServer.length === 0 ? (
+        <p>No tasks left</p>
+      ) : (
+        <ul>
+          {tasksFromServer.map((task) => {
             return <Task key={task._id} taskObj={task} onDelete={deleteTask} />;
           })}
-          </ul>
+        </ul>
       )}
       <Outlet />
     </>
   );
 }
-
